@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
+		<title></title>
+		<style type="text/css">
+			.container{
+				width: 600px;
+				height: 600px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="container" class="container">
+			
+		</div>
+		
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=71f0d405b1147a25953c33a73f685782"></script> 
+		<script type="text/javascript">
+			var map = new AMap.Map('container', {
+		        zoom:20,//级别 最大20
+		        center: [113.629262,34.711737],//中心点坐标
+		        pitch:70, // 地图俯仰角度，有效范围 0 度- 83 度
+		        viewMode:'3D'//使用3D视图
+		    });
+		    
+		    
+			// 地图控件
+		    // 同时引入工具条插件，比例尺插件和鹰眼插件
+			AMap.plugin([
+			    'AMap.ToolBar',
+			    'AMap.Scale',
+			    'AMap.OverView',
+			    'AMap.MapType',
+			    'AMap.Geolocation',
+			], function(){
+			    // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+			    map.addControl(new AMap.ToolBar());
+			
+			    // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
+			    map.addControl(new AMap.Scale());
+			
+			    // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+			    map.addControl(new AMap.OverView({isOpen:true}));
+			   
+			    // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+			    map.addControl(new AMap.MapType());
+			   
+			    // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+			    map.addControl(new AMap.Geolocation());
+			});
+			
+			
+			// 创建一个点标记
+			// 创建一个 Marker 实例：
+			var marker = new AMap.Marker({
+			    position: new AMap.LngLat(113.629262,34.711737),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+			    title: 'pigHome'
+			});
+			
+			// 将创建的点标记添加到已有的地图实例：
+			map.add(marker);
+			
+		</script>
+		
+	</body>
+</html>
